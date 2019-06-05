@@ -75,6 +75,55 @@ male(doran_martell).
 male(oberyn_martell).
 male(trystane_martell).
 
+/* Tarlys */
+male(randyll_tarly).
+male(samwell_tarly).
+male(dickon_tarly).
+
+/* Reeds */
+male(howland_reed).
+male(jojen_reed).
+
+/* Mormonts */
+male(jeor_mormont).
+male(jorah_mormont).
+
+/* Glovers */
+male(galbart_glover).
+male(robett_glover).
+male(gawen_glover).
+
+/* Umbers */
+male(greatjon_umber).
+male(smalljon_umber).
+male(ned_umber).
+
+/* Karstarks */
+male(rickard_karstark).
+male(harrion_karstark).
+male(torrhen_karstark).
+male(harald_karstark).
+
+/* Freys */
+male(walder_frey).
+male(stevron_frey).
+male(lame_lothar_frey).
+male(black_walder_rivers).
+male(ryger_rivers).
+
+/* Other */
+male(davos_seaworth).
+male(bronn).
+male(grey_worm).
+male(daario_naharis).
+male(jaqen_hghar).
+male(podrick_payne).
+male(hot_pie).
+
+/* Wildlings */
+male(little_sam).
+male(tormund_giantsbane).
+
 /* FEMALE CHARACTERS */
 
 /* Starks */
@@ -121,6 +170,42 @@ female(margaery_tyrell).
 /* Martells */
 female(elia_martell).
 
+/* Tarlys */
+female(melessa_tarly).
+female(talla_tarly).
+
+/* Reeds */
+female(jyana_reed).
+female(meera_reed).
+
+/* Mormonts */
+female(maege_mormont).
+female(lyanna_mormont).
+
+/* Glovers */
+female(sybelle_glover).
+female(erena_glover).
+
+/* Karstarks */
+female(alys_karstark).
+
+/* Freys */
+female(joyeuse_frey).
+female(kitty_frey).
+female(roslin_frey).
+female(walda_frey).
+
+/* Other */
+female(brienne).
+female(ellaria_sand).
+female(obara_sand).
+female(nymeria_sand).
+female(tyene_sand).
+female(missandei).
+
+/* Wildlings */
+female(gilly).
+female(ygritte).
 
 /* ----PARENTS---- */
 
@@ -249,6 +334,114 @@ parent(oberyn_martell, nymeria_sand).
 parent(oberyn_martell, tyene_sand).
 parent(ellaria_sand, tyene_sand).
 
+/* House Tarly */
+parent(randyll_tarly, samwell_tarly).
+parent(randyll_tarly, talla_tarly).
+parent(randyll_tarly, dickon_tarly).
+parent(melessa_tarly, samwell_tarly).
+parent(melessa_tarly, talla_tarly).
+parent(melessa_tarly, dickon_tarly).
+
+/* House Mormont */
+parent(jeor_mormont, jorah_mormont).
+parent(maege_mormont, lyanna_mormont).
+
+/* House Glover */
+parent(robett_glover, gawen_glover).
+parent(robett_glover, erena).
+parent(sybelle_glover, gawen_glover).
+parent(sybelle_glover, erena).
+
+/* House Umber */
+parent(greatjon_umber, smalljon_umber).
+parent(smalljon_umber, ned_umber).
+
+/* House Karstark */
+parent(rickard_karstark, harrion_karstark).
+parent(rickard_karstark, torrhen_karstark).
+parent(rickard_karstark, harald_karstark).
+parent(harald_karstark, alys_karstark).
+
+/* House Frey */
+parent(walder_frey, stevron_frey).
+parent(walder_frey, lame_lothar_frey).
+parent(walder_frey, roslin_frey).
+parent(walder_frey, black_walder_rivers).
+parent(walder_frey, ryger_rivers).
+
+
+
+/* ----ALIVE---- */
+
+/* Starks */
+status(benjen_stark, alive).
+status(bran_stark, alive).
+status(jon_snow, alive).
+status(sansa_stark, alive).
+status(arya_stark, alive).
+
+/* Targaryens - dead */
+
+/* Lannisters */
+status(tyrion_lannister, alive).
+status(kevan_lannister, alive).
+
+/* Arryns */
+
+status(robin_arryn, alive).
+
+/* Tullys */
+
+status(edmure_tully, alive).
+
+/* Boltons - dead */
+
+/* Greyjoys */
+
+status(yara_greyjoy, alive).
+status(aeron_greyjoy, alive).
+
+/* Baratheons */
+
+status(gendry_baratheon, alive).
+
+/* Tyrells - dead */
+
+/* Tarlys */
+status(samwell_tarly, alive).
+status(talla_tarly, alive).
+status(melessa_tarly, alive).
+
+/* Reeds */
+status(meera_reed, alive).
+status(howland_reed, alive).
+
+/* Glovers */
+status(erena_glover, alive).
+status(sybelle_glover, alive).
+
+/* Freys */
+status(roslin_frey, alive).
+
+/* Wildlings */
+status(gilly, alive).
+status(little_sam, alive).
+status(tormund_giantsbane, alive).
+
+/* Other */
+status(brienne, alive).
+status(davos_seaworth, alive).
+status(bronn, alive).
+status(grey_worm, alive).
+status(daario_naharis, alive).
+status(jaqen_hghar, alive).
+status(podrick_payne, alive).
+status(ellaria_sand, alive).
+status(hot_pie, alive).
+
+
+/* DEAD */
+status(X, dead) :- not(status(X, alive)).
 
 /* ----RULES---- */
 
@@ -263,6 +456,6 @@ father(X, Y) :- parent(X,Y), male(X).
 
 /* Siblings */
 siblings(X, Y) :-
-  father(Z, X),
-  father(Z, Y),
+  parent(Z, X),
+  parent(Z, Y),
   dif(X, Y).
