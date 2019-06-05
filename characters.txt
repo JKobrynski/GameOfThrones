@@ -142,6 +142,43 @@ HOUSE MORMONT
 - Maege Mormont
 - Lyanna Mormont
 
+HOUSE GLOVER
+
+- Galbart Glover
+- Robett Glover
+- Gawen Glover
+
+- Sybelle Glover
+- Erena Glover
+
+HOUSE UMBER
+
+- Greatjon Umber
+- Smalljon Umber
+- Ned Umber
+
+HOUSE KARSTARK
+
+- Rickard Karstark
+- Harrion Karstark
+- Torrhen Karstark
+- Harald Karstark
+
+- Alys Karstark
+
+HOUSE FREY
+
+- Walder Frey
+- Stevron Frey
+- Lame Lothar Frey
+- Black Walder Rivers
+- Ryger Rivers
+
+- Joyeuse Frey
+- Kitty Frey
+- Roslin Frey
+- Walda Frey 
+
 OTHER
 
 - Ellaria Sand
@@ -157,6 +194,8 @@ OTHER
 - Missandei
 - Podrick Payne
 - Hot Pie
+- Gregor Clegane
+- Sandor Clegane
 
 WILDLINGS
 

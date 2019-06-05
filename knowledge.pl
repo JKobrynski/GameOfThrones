@@ -119,6 +119,8 @@ male(daario_naharis).
 male(jaqen_hghar).
 male(podrick_payne).
 male(hot_pie).
+male(gregor_clegane).
+male(sandor_clegane).
 
 /* Wildlings */
 male(little_sam).
@@ -445,17 +447,119 @@ status(X, dead) :- not(status(X, alive)).
 
 /* ----RULES---- */
 
-/* Children */
+/* Child */
 child(X, Y) :- parent(Y, X).
 
+/* Daughter */
+daughter(X, Y) :- 
+  child(X, Y),
+  female(X).
+
+/* Son */
+son(X, Y) :-
+  child(X, Y),
+  male(X).
+
+/* Children */
+children(X, Children) :-
+  setof(Y, parent(X, Y), Children).
+
+
 /* Mother */
-mother(X, Y) :- parent(X,Y), female(X).
+mother(X, Y) :- 
+  parent(X,Y), 
+  female(X).
 
 /* Father */
-father(X, Y) :- parent(X,Y), male(X).
+father(X, Y) :- 
+  parent(X,Y), 
+  male(X).
+
+/* Sister */
+sister(X, Y) :- 
+  siblings(X,Y), 
+  female(X).
+
+/* Brother */
+brother(X, Y) :- 
+  siblings(X, Y), 
+  male(X).
+
+/* Aunt */
+aunt(X, Y) :- 
+  parent(Z, Y), 
+  sister(X, Z).
+
+/* Uncle */
+uncle(X, Y) :- 
+  parent(Z, Y), 
+  brother(X, Z).
+
+/* Niece */
+niece(X, Y) :-
+  parent(Z, X),
+  siblings(Z, Y),
+  female(X).
+
+/* Nephew */
+nephew(X, Y) :-
+  parent(Z, X),
+  siblings(Z, Y),
+  male(X).
+
+/* Grandfather */
+grandfather(X,Y) :-
+  parent(Z, Y),
+  father(X, Z).
+
+/* Grandmother */
+grandmother(X,Y) :-
+  parent(Z, Y),
+  mother(X, Z).
+
+/* Cousins */
+cousins(X,Y) :-
+  parent(Z, X),
+  parent(S, Y),
+  siblings(Z, S),
+  dif(X,Y).
 
 /* Siblings */
-siblings(X, Y) :-
+ sibling(X, Y) :-
   parent(Z, X),
   parent(Z, Y),
   dif(X, Y).
+
+list_siblings(X, Siblings) :-
+  setof(Y, sibling(X, Y), Siblings);
+  Siblings = none.
+
+siblings(X,Y) :-
+  list_siblings(X, Siblings),
+  member(Y, Siblings).
+
+siblings(sandor_clegane, gregor_clegane).
+
+/* Parents */
+parents(X, Parents) :-
+	setof(Y, parent(Y, X), Parents),
+	!.
+
+parents(X, Parents) :-
+	not(setof(Y, parent(Y, X), Parents)),		
+	Parents = unknown.	
+
+/* Ancestors */
+ancestor(X, Y) :-    parent(X, Y).
+
+ancestor(X, Y) :-    parent(X, Z),    ancestor(Z, Y).
+
+ancestors(X, Ancestor_of) :- 
+  findall(A, ancestor(X, A), 
+  Ancestor_of).
+
+/* Get status */
+get_status(X) :-
+  status(X, Status),
+  format("Status: ~w", [Status]),
+  nl.
