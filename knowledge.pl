@@ -11,13 +11,128 @@ male(rickon_stark).
 male(jon_snow).
 
 /* Targaryens */
+male(maekar_targaryen).
+male(aerion_targaryen).
+male(aemon_targaryen).
+male(aegon_V_targaryen).
+male(duncan_targaryen).
+male(aerys_II_targaryen).
+male(daeron_targaryen).
+male(rhaegar_targaryen).
+male(viserys_targaryen).
+male(aegon_targaryen).
+
+/* Lannisters */
+male(tytos_lannister).
+male(tywin_lannister).
+male(kevan_lannister).
+male(jaime_lannister).
+male(tyrion_lannister).
+male(lancel_lannister).
+male(martyn_lannister).
+male(willem_lannister).
+
+/* Arryns */
+male(jasper_arryn).
+male(jon_arryn).
+male(ronnel_arryn).
+male(robin_arryn).
+
+/* Tullys */
+male(hoster_tully).
+male(edmure_tully).
+
+/* Boltons */
+male(roose_bolton).
+male(ramsay_bolton).
+
+/* Greyjoys */
+male(quellon_greyjoy).
+male(balon_greyjoy).
+male(euron_greyjoy).
+male(aeron_greyjoy).
+male(rodrik_greyjoy).
+male(maron_greyjoy).
+male(theon_greyjoy).
+
+/* Baratheons */
+male(steffon_baratheon).
+male(robert_baratheon).
+male(stannis_baratheon).
+male(renly_baratheon).
+male(joffrey_baratheon).
+male(tommen_baratheon).
+male(gendry_baratheon).
+
+/* Tyrells */
+male(luthor_tyrell).
+male(mace_tyrell).
+male(loras_tyrell).
+
+/* Martells */
+male(lewyn_martell).
+male(doran_martell).
+male(oberyn_martell).
+male(trystane_martell).
+
+/* FEMALE CHARACTERS */
+
+/* Starks */
+female(lyarra_stark).
+female(lyanna_stark).
+female(sansa_stark).
+female(arya_stark).
+
+/* Targaryens */
+female(rhaelle_targaryen).
+female(daenerys_targaryen).
+female(rhaenys_targaryen).
+
+/* Lannisters */
+female(jeyne_lannister).
+female(joanna_lannister).
+female(dorna_lannister).
+female(cersei_lannister).
+
+/* Arryns */
+female(alys_arryn).
+
+/* Tullys */
+female(minisa_tully).
+female(catelyn_stark).
+female(lysa_tully).
+
+/* Greyjoys */
+female(alannys_greyjoy).
+female(yara_greyjoy).
+
+/* Baratheons */
+female(cassana_baratheon).
+female(selyse_baratheon).
+female(barra_baratheon).
+female(myrcella_baratheon).
+female(shireen_baratheon).
+
+/* Tyrells */
+female(olenna_tyrell).
+female(alerie_tyrell).
+female(margaery_tyrell).
+
+/* Martells */
+female(elia_martell).
 
 
-/* HOUSE STARK */
+/* ----PARENTS---- */
+
+/* House Stark */
 parent(rickard_stark, eddard_stark).
 parent(rickard_stark, brandon_stark).
 parent(rickard_stark, benjen_stark).
 parent(rickard_stark, lyanna_stark).
+parent(lyarra_stark, eddard_stark).
+parent(lyarra_stark, brandon_stark).
+parent(lyarra_stark, benjen_stark).
+parent(lyarra_stark, lyanna_stark).
 parent(eddard_stark, arya_stark).
 parent(eddard_stark, robb_stark).
 parent(eddard_stark, sansa_stark).
@@ -81,6 +196,9 @@ parent(lysa_tully, robin_arryn).
 parent(hoster_tully, lysa_tully).
 parent(hoster_tully, edmure_tully).
 parent(hoster_tully, catelyn_stark).
+parent(minisa_tully, lysa_tully).
+parent(minisa_tully, edmure_tully).
+parent(minisa_tully, catelyn_stark).
 
 /* House Bolton */
 parent(roose_bolton, ramsay_bolton).
@@ -102,6 +220,9 @@ parent(alannys_greyjoy, theon_greyjoy).
 parent(steffon_baratheon, robert_baratheon).
 parent(steffon_baratheon, stannis_baratheon).
 parent(steffon_baratheon, renly_baratheon).
+parent(cassana_baratheon, robert_baratheon).
+parent(cassana_baratheon, stannis_baratheon).
+parent(cassana_baratheon, renly_baratheon).
 parent(robert_baratheon, gendry_baratheon).
 parent(robert_baratheon, barra_baratheon).
 parent(stannis_baratheon, shireen_baratheon).
@@ -128,5 +249,20 @@ parent(oberyn_martell, nymeria_sand).
 parent(oberyn_martell, tyene_sand).
 parent(ellaria_sand, tyene_sand).
 
-/* Children rule */
+
+/* ----RULES---- */
+
+/* Children */
 child(X, Y) :- parent(Y, X).
+
+/* Mother */
+mother(X, Y) :- parent(X,Y), female(X).
+
+/* Father */
+father(X, Y) :- parent(X,Y), male(X).
+
+/* Siblings */
+siblings(X, Y) :-
+  father(Z, X),
+  father(Z, Y),
+  dif(X, Y).
